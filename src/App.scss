@@ -1,0 +1,36 @@
+label {
+  display: block;
+  margin-bottom: 10px;
+  text-transform: capitalize;
+}
+
+input {
+  width: 100%;
+  padding: 10px 15px;
+  margin-bottom: 20px;
+  font: inherit;
+  border: 1px solid teal;
+  background-color: transparent;
+  border-radius: 5px;
+  outline: none;
+  transition: 0.3s;
+
+  &:hover {
+    background-color: lavender;
+  }
+}
+
+button {
+  display: block;
+  font: inherit;
+  background-color: transparent;
+  border: none;
+  padding: 10px 15px;
+  transition: 0.3s;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+

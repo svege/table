@@ -1,0 +1,35 @@
+.Table {
+  width: 100%;
+  table-layout: fixed;
+
+  td:not(:last-child) {
+    padding: 5px 15px;
+  }
+
+  th:last-child,
+  td:last-child {
+    padding: 0;
+    width: 5%;
+  }
+
+  th {
+    padding: 15px;
+    text-align: left;
+    text-transform: capitalize;
+    background-color: aliceblue;
+
+    &:last-child {
+      background-color: transparent;
+    }
+  }
+
+  button {
+    border: none;
+    color: salmon;
+
+    &:focus,
+    &:hover {
+      background-color: lemonchiffon;
+    }
+  }
+}

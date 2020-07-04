@@ -1,0 +1,13 @@
+.Header {
+  padding: 15px 0;
+  margin-bottom: 50px;
+  background-color: aliceblue;
+
+  &__title {
+    margin: 0 auto;
+    font-size: 30px;
+
+    text-align: center;
+    text-transform: uppercase;
+  }
+}

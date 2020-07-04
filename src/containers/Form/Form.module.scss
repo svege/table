@@ -1,0 +1,26 @@
+.Form {
+  width: 80%;
+  margin: 50px auto;
+
+  &__wrap {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    div {
+      width: 40%;
+    }
+  }
+
+  &__button {
+    width: 300px;
+    margin: 20px 0 0 auto;
+    background-color: lavender;
+
+    &:hover,
+    &:focus {
+      //background-color: lightcyan;
+      background-color: aliceblue;
+    }
+  }
+}
