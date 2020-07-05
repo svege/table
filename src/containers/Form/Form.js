@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
-import Input from "../../components/Input/Input";
+import {func, shape, string} from 'prop-types';
+import Input from '../../components/Input/Input';
 import classes from './Form.module.scss'
+import API_ROOT from '../../api';
 
 class Form extends Component {
     state = {
@@ -18,11 +20,13 @@ class Form extends Component {
 
     addEmployee = (e) => {
         e.preventDefault();
-        let newEmployee = {...this.state.employee, id: this.generateId()}
-        this.props.onFormSubmit(newEmployee);
+        const {employee} = this.state;
+        const {onFormSubmit} = this.props;
+        const newEmployee = {...employee, id: this.generateId()};
+        onFormSubmit(newEmployee);
         this.setState({employee: {id: '', name: '', job_title: '', department: '', month_salary: ''}});
 
-        fetch('https://database-dc5a8.firebaseio.com/employees.json', {
+        fetch(`${API_ROOT}/employees.json`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -33,23 +37,27 @@ class Form extends Component {
     };
 
     setValue = (e) => {
-        this.setState({employee: {...this.state.employee, [e.target.id]: e.target.value}});
+        const {employee} = this.state;
+        this.setState({employee: {...employee, [e.target.id]: e.target.value}});
     };
 
     render() {
-        let fields = Object.entries(this.props.fields);
-        let inputs = fields.map(item =>
+        const {employee} = this.state;
+        const {fields} = this.props;
+
+        const columns = Object.entries(fields);
+        const inputs = columns.map(item =>
             <Input
                 key={item[0]}
                 field={item}
-                value={this.state.employee[item[0]]}
-                employee={this.state.employee}
+                value={employee[item[0]]}
+                employee={employee}
                 changed={e => this.setValue(e)}/>
         );
 
 
         return (
-            <form className={classes.Form} onSubmit={this.addEmployee} autoComplete="off">
+            <form className={classes.Form} onSubmit={this.addEmployee} autoComplete='off'>
                 <div className={classes.Form__wrap}>
                     {inputs}
                 </div>
@@ -58,5 +66,15 @@ class Form extends Component {
         );
     }
 }
+
+Form.propTypes = {
+    onFormSubmit: func.isRequired,
+    fields: shape({
+        name: string.isRequired,
+        job_title: string.isRequired,
+        department: string.isRequired,
+        month_salary: string.isRequired
+    }).isRequired
+};
 
 export default Form;

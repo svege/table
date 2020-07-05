@@ -1,39 +1,45 @@
 import React, {Component} from 'react';
-import classes from "./SortingButtons.module.scss";
+import {func, shape, string} from 'prop-types';
+import classes from './SortingButtons.module.scss';
 
 class SortingButtons extends Component {
     sortArr = (key) => {
-        let sorted = [...this.props.employees];
-        let direction = this.props.sorting.direction;
+        const {employees, sorting, onFilterClick} = this.props;
+        const sorted = [...employees];
+        let sortDirection = sorting.direction;
 
+        // eslint-disable-next-line no-restricted-globals
         const check = isNaN(+sorted[0][key]);
 
-        if (this.props.sorting.value === key && this.props.sorting.direction === 'up') {
-            direction = 'down';
+        if (sorting.value === key && sorting.direction === 'up') {
+            sortDirection = 'down';
         } else {
-            direction = 'up';
+            sortDirection = 'up';
         }
 
         if (!check) {
             sorted.sort((a, b) => {
-                if (+a[key] < +b[key]) return direction === 'up' ? -1 : 1;
-                if (+a[key] > +b[key]) return direction === 'up' ? 1 : -1;
+                if (+a[key] < +b[key]) return sortDirection === 'up' ? -1 : 1;
+                if (+a[key] > +b[key]) return sortDirection === 'up' ? 1 : -1;
                 return 0;
             })
         } else {
             sorted.sort((a, b) => {
-                if (a[key].toUpperCase() < b[key].toUpperCase()) return direction === 'up' ? -1 : 1;
-                if (a[key].toUpperCase() > b[key].toUpperCase()) return direction === 'up' ? 1 : -1;
+                if (a[key].toUpperCase() < b[key].toUpperCase()) return sortDirection === 'up' ? -1 : 1;
+                if (a[key].toUpperCase() > b[key].toUpperCase()) return sortDirection === 'up' ? 1 : -1;
                 return 0;
             })
         }
-        this.props.onFilterClick(sorted, key, direction)
+        onFilterClick(sorted, key, sortDirection)
     };
 
     render() {
-        let fields = Object.entries(this.props.fields);
-        let buttons = fields.map(item => <button
-            key={`sort` + item[0]}
+        const {fields} = this.props;
+
+        const columns = Object.entries(fields);
+        const buttons = columns.map(item => <button
+            type='button'
+            key={`sort${  item[0]}`}
             className={classes.Button}
             onClick={() => this.sortArr(item[0])}>
             {item[1]}
@@ -48,5 +54,20 @@ class SortingButtons extends Component {
         );
     }
 }
+
+SortingButtons.propTypes = {
+    sorting: shape({
+        direction: string.isRequired,
+        value: string.isRequired
+    }).isRequired,
+    fields: shape({
+        name: string.isRequired,
+        job_title: string.isRequired,
+        department: string.isRequired,
+        month_salary: string.isRequired
+    }).isRequired,
+    employees: shape([]).isRequired,
+    onFilterClick: func.isRequired
+};
 
 export default SortingButtons;

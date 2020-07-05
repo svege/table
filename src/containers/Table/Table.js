@@ -1,25 +1,41 @@
 import React, {Component} from 'react';
-import classes from "./Table.module.scss";
-import Row from "../../components/Row/Row";
+import {func, shape} from 'prop-types';
+import classes from './Table.module.scss';
+import Row from '../../components/Row/Row';
+import API_ROOT from '../../api';
 
 class Table extends Component {
     deleteRow = person => {
-        let filtered = [...this.props.employees];
-        let result = filtered.filter(item => item.name !== person.name);
-        this.props.onDeleteClick(result);
+        const {initialData, employees, onDeleteClick} = this.props;
+        const filtered = [...employees];
+        const filteredInitial = [...initialData];
+        const result = filtered.filter(item => item.name !== person.name);
+        const deletedPerson = filteredInitial.filter(item => item.name === person.name);
+
+        onDeleteClick(result);
+        fetch(`${API_ROOT}/employees/${  Object.keys(deletedPerson)[0]  }.json`, {
+            method: 'DELETE',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(deletedPerson)
+        })
     };
 
     render() {
-        let fields = Object.entries(this.props.fields);
-        let headrow = fields.map(item =>
-            <th key={`headcell` + item[0]}>
-                {item[0] === "month_salary" ? item[1]+ `, $` : item[1] }
+        const {fields, employees} = this.props;
+
+        const columns = Object.entries(fields);
+        const headRow = columns.map(item =>
+            <th key={`headcell${  item[0]}`}>
+                {item[0] === 'month_salary' ? `${item[1] }, $` : item[1] }
             </th>);
 
         let content = '';
 
-        if (this.props.employees.length > 0) {
-            content = this.props.employees.map(person => (
+        if (employees.length > 0) {
+            content = employees.map(person => (
                 <Row
                     key={person.id}
                     employee={person}
@@ -32,8 +48,8 @@ class Table extends Component {
             <table className={classes.Table}>
                 <thead>
                 <tr>
-                    {headrow}
-                    <th></th>
+                    {headRow}
+                    <th />
                 </tr>
                 </thead>
                 <tbody>
@@ -43,5 +59,12 @@ class Table extends Component {
         );
     }
 }
+
+Table.propTypes = {
+    fields: shape({}).isRequired,
+    initialData: shape([]).isRequired,
+    employees: shape([]).isRequired,
+    onDeleteClick: func.isRequired
+};
 
 export default Table;

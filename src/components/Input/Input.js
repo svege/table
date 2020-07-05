@@ -1,25 +1,32 @@
 import React from 'react';
+import {func, shape, string} from 'prop-types';
 
-const Input = (props) => {
+const Input = ({field, changed, value}) => {
     return (
         <div>
-            <label htmlFor={props.field[0]}>
-                {props.field[1]}
-                {props.field[0]==='month_salary'
+            <label htmlFor={field[0]}>
+                {field[1]}
+                {field[0] === 'month_salary'
                     ? <span style={{textTransform: 'lowercase'}}> (numbers only)</span>
                     : ''
                 }
             </label>
 
             <input
-                id={props.field[0]}
-                placeholder={`Add ${props.field[1]}`}
-                value={props.value}
-                onChange={props.changed}
-                type={props.field[0]==='month_salary' ? 'number' : 'text'}
+                id={field[0]}
+                placeholder={`Add ${field[1]}`}
+                value={value}
+                onChange={changed}
+                type={field[0] === 'month_salary' ? 'number' : 'text'}
                 required/>
         </div>
     );
+};
+
+Input.propTypes = {
+    field: shape([]).isRequired,
+    value: string.isRequired,
+    changed: func.isRequired,
 };
 
 export default Input;

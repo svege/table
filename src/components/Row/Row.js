@@ -1,15 +1,27 @@
 import React from 'react';
+import {func, number, shape, string} from 'prop-types';
 
-const Row = (props) => {
+const Row = ({employee, deleted}) => {
     return (
         <tr>
-            <td>{props.employee.name}</td>
-            <td>{props.employee.job_title}</td>
-            <td>{props.employee.department}</td>
-            <td>{props.employee.month_salary}</td>
-            <td><button onClick={props.deleted}>&#x2715;</button></td>
+            <td>{employee.name}</td>
+            <td>{employee.job_title}</td>
+            <td>{employee.department}</td>
+            <td>{employee.month_salary}</td>
+            <td><button type='button' onClick={deleted}>&#x2715;</button></td>
         </tr>
     );
+};
+
+Row.propTypes = {
+    employee: shape({
+        name: string.isRequired,
+        job_title: string.isRequired,
+        department: string.isRequired,
+        month_salary: number.isRequired,
+
+    }).isRequired,
+    deleted: func.isRequired,
 };
 
 export default Row;
