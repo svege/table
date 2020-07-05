@@ -13,14 +13,19 @@ class Table extends Component {
         const deletedPerson = filteredInitial.filter(item => item.name === person.name);
 
         onDeleteClick(result);
-        fetch(`${API_ROOT}/employees/${  Object.keys(deletedPerson)[0]  }.json`, {
-            method: 'DELETE',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(deletedPerson)
-        })
+        try {
+            fetch(`${API_ROOT}/employees/${Object.keys(deletedPerson)[0]}.json`, {
+                method: 'DELETE',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(deletedPerson)
+            })
+        }  catch (error) {
+            // eslint-disable-next-line no-console
+            console.error('Ошибка:', error);
+        }
     };
 
     render() {

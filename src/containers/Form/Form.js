@@ -26,14 +26,19 @@ class Form extends Component {
         onFormSubmit(newEmployee);
         this.setState({employee: {id: '', name: '', job_title: '', department: '', month_salary: ''}});
 
-        fetch(`${API_ROOT}/employees.json`, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(newEmployee)
-        })
+        try {
+            fetch(`${API_ROOT}/employees.json`, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(newEmployee)
+            })
+        } catch (error) {
+            // eslint-disable-next-line no-console
+            console.error('Ошибка:', error);
+        }
     };
 
     setValue = (e) => {
