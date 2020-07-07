@@ -10,17 +10,17 @@ class Table extends Component {
         const filtered = [...employees];
         const filteredInitial = [...initialData];
         const result = filtered.filter(item => item.name !== person.name);
-        const deletedPerson = filteredInitial.filter(item => item.name === person.name);
+        const deletedKey =  Object.keys(filteredInitial).find(key => filteredInitial[key] === person);
 
         onDeleteClick(result);
         try {
-            fetch(`${API_ROOT}/employees/${Object.keys(deletedPerson)[0]}.json`, {
+            fetch(`${API_ROOT}/employees/${Object.keys(deletedKey)[0]}.json`, {
                 method: 'DELETE',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(deletedPerson)
+                body: JSON.stringify(filteredInitial[deletedKey])
             })
         }  catch (error) {
             // eslint-disable-next-line no-console
