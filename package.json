@@ -2,6 +2,7 @@
   "name": "table",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://zveta.github.io/table",
   "dependencies": {
     "@babel/core": "7.9.0",
     "@svgr/webpack": "4.3.3",
@@ -65,6 +66,7 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
+    "deploy": "gh-pages -d build",
     "test": "node scripts/test.js",
     "lint": "eslint ./src",
     "lint:fix": "eslint --fix --ext .js,.jsx ./src"
@@ -144,6 +146,7 @@
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-prettier": "^3.1.4",
+    "gh-pages": "^3.1.0",
     "prettier": "^2.0.5"
   }
 }
