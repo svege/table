@@ -14,7 +14,7 @@ class Table extends Component {
 
         onDeleteClick(result);
         try {
-            fetch(`${API_ROOT}/employees/${Object.keys(deletedKey)[0]}.json`, {
+            fetch(`${API_ROOT}/employees/${deletedKey}.json`, {
                 method: 'DELETE',
                 headers: {
                     'Accept': 'application/json',
