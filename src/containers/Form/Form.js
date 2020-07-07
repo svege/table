@@ -10,7 +10,7 @@ class Form extends Component {
             name: '',
             job_title: '',
             department: '',
-            month_salary: ''
+            ly_salary: ''
         }
     };
 
@@ -24,7 +24,7 @@ class Form extends Component {
         const {onFormSubmit} = this.props;
         const newEmployee = {...employee, id: this.generateId()};
         onFormSubmit(newEmployee);
-        this.setState({employee: {id: '', name: '', job_title: '', department: '', month_salary: ''}});
+        this.setState({employee: {id: '', name: '', job_title: '', department: '', monthly_salary: ''}});
 
         try {
             fetch(`${API_ROOT}/employees.json`, {
@@ -78,7 +78,7 @@ Form.propTypes = {
         name: string.isRequired,
         job_title: string.isRequired,
         department: string.isRequired,
-        month_salary: string.isRequired
+        monthly_salary: string.isRequired
     }).isRequired
 };
 

@@ -7,7 +7,7 @@ const Row = ({employee, deleted}) => {
             <td>{employee.name}</td>
             <td>{employee.job_title}</td>
             <td>{employee.department}</td>
-            <td>{employee.month_salary}</td>
+            <td>{employee.monthly_salary}</td>
             <td><button type='button' onClick={deleted}>&#x2715;</button></td>
         </tr>
     );
@@ -18,7 +18,7 @@ Row.propTypes = {
         name: string.isRequired,
         job_title: string.isRequired,
         department: string.isRequired,
-        month_salary: number.isRequired,
+        monthly_salary: number.isRequired,
 
     }).isRequired,
     deleted: func.isRequired,

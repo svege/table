@@ -34,7 +34,7 @@ class Table extends Component {
         const columns = Object.entries(fields);
         const headRow = columns.map(item =>
             <th key={`headcell${  item[0]}`}>
-                {item[0] === 'month_salary' ? `${item[1] }, $` : item[1] }
+                {item[0] === 'monthly_salary' ? `${item[1] }, $` : item[1] }
             </th>);
 
         let content = '';

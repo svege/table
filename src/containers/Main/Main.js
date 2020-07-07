@@ -15,7 +15,7 @@ class Main extends Component {
             name: 'name',
             job_title: 'job title',
             department: 'department',
-            month_salary: 'monthly salary'
+            monthly_salary: 'monthly salary'
         },
         error: false,
         isLoaded: false,

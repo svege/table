@@ -15,7 +15,7 @@ class Search extends Component {
                 item.name.toLowerCase().includes(e.target.value.toLowerCase()) ||
                 item.job_title.toLowerCase().includes(e.target.value.toLowerCase()) ||
                 item.department.toLowerCase().includes(e.target.value.toLowerCase()) ||
-                item.month_salary.toString().includes(e.target.value.toLowerCase())
+                item.monthly_salary.toString().includes(e.target.value.toLowerCase())
             )
         });
         this.setState( { searchTerm: e.target.value});

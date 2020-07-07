@@ -6,7 +6,7 @@ const Input = ({field, changed, value}) => {
         <div>
             <label htmlFor={field[0]}>
                 {field[1]}
-                {field[0] === 'month_salary'
+                {field[0] === 'monthly_salary'
                     ? <span style={{textTransform: 'lowercase'}}> (numbers only)</span>
                     : ''
                 }
@@ -17,7 +17,7 @@ const Input = ({field, changed, value}) => {
                 placeholder={`Add ${field[1]}`}
                 value={value}
                 onChange={changed}
-                type={field[0] === 'month_salary' ? 'number' : 'text'}
+                type={field[0] === 'monthly_salary' ? 'number' : 'text'}
                 required/>
         </div>
     );

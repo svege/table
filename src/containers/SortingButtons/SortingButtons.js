@@ -64,7 +64,7 @@ SortingButtons.propTypes = {
         name: string.isRequired,
         job_title: string.isRequired,
         department: string.isRequired,
-        month_salary: string.isRequired
+        monthly_salary: string.isRequired
     }).isRequired,
     employees: shape([]).isRequired,
     onFilterClick: func.isRequired
