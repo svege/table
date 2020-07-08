@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {func, shape} from 'prop-types';
+import {arrayOf, func, number, shape, string} from 'prop-types';
 import classes from './Table.module.scss';
 import Row from '../../components/Row/Row';
 import API_ROOT from '../../api';
@@ -67,8 +67,18 @@ class Table extends Component {
 
 Table.propTypes = {
     fields: shape({}).isRequired,
-    initialData: shape([]).isRequired,
-    employees: shape([]).isRequired,
+    initialData: arrayOf(shape({
+        name: string.isRequired,
+        job_title: string.isRequired,
+        department: string.isRequired,
+        monthly_salary: number.isRequired
+    })).isRequired,
+    employees: arrayOf(shape({
+        name: string.isRequired,
+        job_title: string.isRequired,
+        department: string.isRequired,
+        monthly_salary: number.isRequired
+    })).isRequired,
     onDeleteClick: func.isRequired
 };
 

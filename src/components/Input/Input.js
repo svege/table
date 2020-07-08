@@ -1,5 +1,5 @@
 import React from 'react';
-import {func, shape, string} from 'prop-types';
+import {func, arrayOf, string} from 'prop-types';
 
 const Input = ({field, changed, value}) => {
     return (
@@ -24,7 +24,7 @@ const Input = ({field, changed, value}) => {
 };
 
 Input.propTypes = {
-    field: shape([]).isRequired,
+    field: arrayOf(string).isRequired,
     value: string.isRequired,
     changed: func.isRequired,
 };

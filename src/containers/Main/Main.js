@@ -82,7 +82,7 @@ class Main extends Component {
         let content ='';
 
         if (error) {
-            content = <p>Ошибка: {error.message}</p>;
+            content = <p>Error: {error.message}</p>;
         } else if (!isLoaded) {
             content = <Spinner/>;
         } else {

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {func, shape} from 'prop-types';
+import {func, shape, string, arrayOf, number} from 'prop-types';
 import classes from './Search.module.scss';
 
 class Search extends Component {
@@ -43,7 +43,12 @@ class Search extends Component {
 
 Search.propTypes = {
     onSearchChange: func.isRequired,
-    initialData: shape([]).isRequired
+    initialData: arrayOf(shape({
+        name: string.isRequired,
+        job_title: string.isRequired,
+        department: string.isRequired,
+        monthly_salary: number.isRequired
+    })).isRequired
 };
 
 export default Search;

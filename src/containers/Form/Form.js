@@ -4,14 +4,16 @@ import Input from '../../components/Input/Input';
 import classes from './Form.module.scss'
 import API_ROOT from '../../api';
 
+const emptyEmployee = {
+    name: '',
+    job_title: '',
+    department: '',
+    monthly_salary: ''
+};
+
 class Form extends Component {
     state = {
-        employee: {
-            name: '',
-            job_title: '',
-            department: '',
-            ly_salary: ''
-        }
+        employee: emptyEmployee
     };
 
     generateId = () => {
@@ -24,7 +26,7 @@ class Form extends Component {
         const {onFormSubmit} = this.props;
         const newEmployee = {...employee, id: this.generateId()};
         onFormSubmit(newEmployee);
-        this.setState({employee: {id: '', name: '', job_title: '', department: '', monthly_salary: ''}});
+        this.setState({employee: emptyEmployee});
 
         try {
             fetch(`${API_ROOT}/employees.json`, {

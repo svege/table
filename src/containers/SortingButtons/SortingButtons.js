@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {func, shape, string} from 'prop-types';
+import {arrayOf, func, number, shape, string} from 'prop-types';
 import classes from './SortingButtons.module.scss';
 
 class SortingButtons extends Component {
@@ -66,7 +66,12 @@ SortingButtons.propTypes = {
         department: string.isRequired,
         monthly_salary: string.isRequired
     }).isRequired,
-    employees: shape([]).isRequired,
+    employees: arrayOf(shape({
+        name: string.isRequired,
+        job_title: string.isRequired,
+        department: string.isRequired,
+        monthly_salary: number.isRequired
+    })).isRequired,
     onFilterClick: func.isRequired
 };
 
